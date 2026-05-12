@@ -39,4 +39,9 @@ public class Queue {
 	public void print() {
 		list.print();
 	}
+
+	@Override
+	public String toString() {
+		return list.toString();
+	}
 }

@@ -10,45 +10,66 @@
 package lab2_implementation;
 
 public class Sort {
+	private int comparisons;
+	
 	public Sort() {
-		
+		this.comparisons = 0;
 	}
 	
+	public int getComparisons(){
+		return this.comparisons;
+	}
+	
+	public void resetComparisons() {
+		this.comparisons = 0;
+	}
+
 	public Queue sortQueue(Queue qToSort) {
-		Queue nextQ = new Queue();
 		char val = ' ';
+		Queue nextQ = new Queue();
 		// Take first value if queue is not empty
-		if(!qToSort.empty()) {
+		if (!qToSort.empty()) {
 			val = qToSort.dequeue();
 		}
-		// While queue is not empty
-		while(!qToSort.empty()) {
-			// Compare it with second value
-			if(val <= qToSort.front()) {		// if we use >= the sorting is reversed
-				// If first is bigger, second value goes to next iteration
-				nextQ.enqueue(qToSort.dequeue());
-			}else {
-				// If first is smaller, keep second and first goes to next iteration
-				nextQ.enqueue(val);
-				val = qToSort.dequeue();
-			}
-			/*  For debug
-			System.out.println("QToSort");
-			qToSort.print();
-			System.out.println("nextQ");
-			nextQ.print();
-			*/
-		}
-		Queue finalQ = new Queue();
-		finalQ.enqueue(val);
+		nextQ = getNextQueue(val, qToSort);
+		
+		Queue finalQ = qToSort;
 		Queue sortedQ = new Queue();
-		if(!nextQ.empty()) {
-			 sortedQ = sortQueue(nextQ);
+		if (!nextQ.empty()) {
+			sortedQ = sortQueue(nextQ);
 		}
 		// Append all sorted queues to final queue
-		while(!sortedQ.empty()) {
-			finalQ.enqueue(sortedQ.dequeue());
-		}
+		orderFinalQueue(finalQ, sortedQ);
+
 		return finalQ;
 	}
+	
+	private Queue getNextQueue(char nextVal, Queue qToSort) {
+		Queue nextQ = new Queue();
+		// While queue is not empty
+		while (!qToSort.empty()) {
+			// Compare it with second value
+			if (nextVal <= qToSort.front()) { // if we use >= the sorting is reversed
+				// If first is bigger, second value goes to next iteration
+				nextQ.enqueue(qToSort.dequeue());
+			} else {
+				// If first is smaller, keep second and first goes to next iteration
+				nextQ.enqueue(nextVal);
+				nextVal = qToSort.dequeue();
+			}
+			comparisons++;
+			//For debug 
+			//System.out.println("QToSort"); qToSort2.print();
+			//System.out.println("nextQ"); nextQ2.print();
+		}
+		qToSort.enqueue(nextVal);
+		return nextQ;
+	}
+	
+	private void orderFinalQueue(Queue finalQueue, Queue sortedQueue) {
+		while (!sortedQueue.empty()) {
+			finalQueue.enqueue(sortedQueue.dequeue());
+		}
+	}
+	
 }

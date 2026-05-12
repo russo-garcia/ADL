@@ -100,4 +100,20 @@ public class RingList {
 		e.setNextElement(next);
 		e.setPreviousElement(previous);
 	}
+
+	@Override
+	public String toString() {
+		Element point = first;
+		String r = "";
+		if(first != null) {
+			do {
+				r += point.getData() + " ";
+				point = point.getNextElement();
+			}while(point != null && point != first);
+		}else {
+			r += "Empty Queue";
+		}
+		
+		return r;
+	}
 }
