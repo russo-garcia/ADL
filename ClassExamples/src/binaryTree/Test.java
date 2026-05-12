@@ -12,5 +12,9 @@ public class Test {
         bt.add(6);
         bt.add(42);
         bt.print();
+        System.out.println("min: " + bt.min().getData());
+        int k = 6;
+        //System.out.println("find("+ k +") = " + bt.find(k));
+        System.out.println("succ("+ k +") = " + bt.succ(k).getData());
     }
 }

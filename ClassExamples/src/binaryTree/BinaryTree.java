@@ -10,29 +10,56 @@ public class BinaryTree {
     public boolean empty() {
         return root == null;
     }
+    
+    public Node succ(int k) {
+    	Node nodeK = find(k);
+    	if(nodeK != null) {
+    		if(nodeK.getRight() != null) {
+        		return min(nodeK.getRight());
+        	}else {
+        		Node pred = nodeK.getParent();
+        		while(pred != null && pred.getData() <= nodeK.getData()) {
+        			pred = pred.getParent();
+        		}
+        		return pred;
+        	}
+    	}else {
+    		return null;
+    	}
+    }
+    
+    public Node min() {
+    	return min(root);
+    }
+    
+    private Node min(Node k) {
+    	Node current = k;
+    	while(current.getLeft() != null) {
+    		current = current.getLeft();
+    	}
+    	return current;
+    }
 
     public void add(int data) {
-        Node newNode = new Node(data);
-
         if (empty()) {
-            root = newNode;
+        	root = new Node(data, null);
         } else {
-            add(newNode, root);
+            add(data, root);
         }
     }
 
-    private void add(Node newNode, Node current) {
-        if (newNode.getData() < current.getData()) {
+    private void add(int data, Node current) {
+        if (data < current.getData()) {
             if (current.getLeft() == null) {
-                current.addLeft(newNode);
+                current.addLeft(new Node(data, current));
             } else {
-                add(newNode, current.getLeft());
+                add(data, current.getLeft());
             }
         } else {
             if (current.getRight() == null) {
-                current.addRight(newNode);
+                current.addRight(new Node(data, current));
             } else {
-                add(newNode, current.getRight());
+                add(data, current.getRight());
             }
         }
     }
@@ -40,10 +67,40 @@ public class BinaryTree {
     public void print() {
         print(root);
     }
+    
+    public Node find(int k) {
+    	if(k < root.getData()) {
+    		return find(k, root.getLeft());
+    	}else if(k == root.getData()) {
+    		return root;
+		}
+		else{
+			return find(k, root.getRight());
+		}
+    }
+    
+    private Node find(int k, Node current) {
+    	if(current != null) {
+    		if(k < current.getData()) {
+        		return find(k, current.getLeft());
+        	}else if(k == current.getData()){
+        		return current;
+        	}
+        	else {
+        		return find(k, current.getRight());
+        	}
+    	}else {
+    		return null;
+    	}
+    }
 
     private void print(Node current) {
         if (current != null) {
             System.out.print("current: " + current.getData());
+            
+            if(current != root) {
+            	System.out.print(" parent: " + current.getParent().getData());
+            }
 
             if (current.getLeft() != null) {
                 System.out.print(" left: " + current.getLeft().getData());

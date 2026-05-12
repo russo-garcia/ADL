@@ -2,12 +2,13 @@ package binaryTree;
 
 public class Node {
     private int data;
-    private Node left, right;
+    private Node left, right, parent;
 
-    public Node(int data) {
+    public Node(int data, Node parent) {
         this.data = data;
         left = null;
         right = null;
+        this.parent = parent;
     }
 
     public void addLeft(Node newNode) {
@@ -18,6 +19,10 @@ public class Node {
         right = newNode;
     }
 
+    public Node getParent() {
+    	return this.parent;
+    }
+    
     public Node getLeft() {
         return left;
     }
