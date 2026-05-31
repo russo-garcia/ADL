@@ -11,10 +11,12 @@ public class Test {
 		am.setEntry(2, 2, 1);
 		am.print();
 		
-		int i = 1;
+		//int i = 1;
+		//boolean hasCycle = am.detectCycle(i);
+		//System.out.println("Starting with "+i+" there is a cycle: " + hasCycle);
 		
-		boolean hasCycle = am.detectCycle(i);
-		System.out.println("Starting with "+i+" there is a cycle: " + hasCycle);
+		
+	
 	}
 	
 
