@@ -5,8 +5,10 @@
  * Public Methods:
  * 	- SortedBinaryTree (constructor)
  * 	- empty: returns true if the tree is empty
+ * 	- getRoot: returns the root of the tree
  * 	- insert: inserts a Node into the tree while keeping the sorting order
  * 	- print: prints the tree in sorted order
+ * 	- iterator: returns an iterator for the tree
  */
 
 package lab3_implementation;
@@ -20,6 +22,10 @@ public class SortedBinaryTree<E> {
 	
 	public boolean empty() {
 		return root == null;
+	}
+	
+	public Node getRoot() {
+		return root;
 	}
 	
 	public void insert(Node newNode) {
@@ -56,6 +62,10 @@ public class SortedBinaryTree<E> {
 			printInOrder(root);
 			System.out.println();
 		}
+	}
+	
+	public TreeIterator iterator() {
+		return new TreeIterator(root);
 	}
 	
 	private void printInOrder(Node current) {

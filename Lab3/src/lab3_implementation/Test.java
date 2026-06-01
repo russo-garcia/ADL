@@ -84,8 +84,39 @@ public class Test {
 		}
 		
 		System.out.println("Tree is empty: " + tree.empty());
-		
+
+		System.out.println("Root of tree: " + tree.getRoot().getKey());
+
 		System.out.println("Printing tree in sorted order...");
 		tree.print();
+
+		System.out.println("Verifying tree order with TreeIterator...");
+		testTreeIterator(tree);
+	}
+	
+	public void testTreeIterator(SortedBinaryTree<Node> tree) {
+		System.out.println("Testing TreeIterator...");
+		
+		TreeIterator iterator = tree.iterator();
+		boolean sorted = true;
+		
+		if(iterator.hasNext()) {
+			Node previousNode = iterator.next();
+			System.out.print(previousNode.getKey() + " ");
+			
+			while(iterator.hasNext()) {
+				Node currentNode = iterator.next();
+				System.out.print(currentNode.getKey() + " ");
+				
+				if(previousNode.getKey() > currentNode.getKey()) {
+					sorted = false;
+				}
+				
+				previousNode = currentNode;
+			}
+		}
+		
+		System.out.println();
+		System.out.println("Tree is sorted: " + sorted);
 	}
 }
