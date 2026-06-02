@@ -70,34 +70,7 @@ public class SortedBinaryTree<E> {
 			}
 		}		
 	}
-	
-	public void insert_deprecated(Node newNode) {
-		if(empty()) {
-			root = newNode;
-		}else {
-			Node current = root;
-			Node parent = null;
-			
-			while(current != null) {
-				parent = current;
-				
-				if(newNode.getKey() < current.getKey()) {
-					current = current.getLeft();
-				}else {
-					current = current.getRight();
-				}
-			}
-			
-			newNode.setParent(parent);
-			
-			if(newNode.getKey() < parent.getKey()) {
-				parent.setLeft(newNode);
-			}else {
-				parent.setRight(newNode);
-			}
-		}
-	}
-	
+		
 	public void print() {
 		if(empty()) {
 			System.out.println("Tree is empty!");
