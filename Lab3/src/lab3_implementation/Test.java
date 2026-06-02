@@ -45,11 +45,21 @@ public class Test {
 		stack.print();
 		
 		System.out.println("Testing StackIterator...");
-		StackIterator iterator = stack.iterator();
+		/*StackIterator iterator = stack.iterator();
 
-		while(iterator.hasNext()) {
+		while(iterator.hasNext()) { // replace while-loop with for-each-loop
 			Node currentNode = iterator.next();
 			System.out.print(currentNode.getKey() + " ");
+		}*/
+		for(Node n:stack) {
+			System.out.print(n.getKey() + " ");
+		}
+		
+		System.out.println();
+		System.out.println("Second run ");
+		
+		for(Node n:stack) {
+			System.out.print(n.getKey() + " ");
 		}
 
 		System.out.println();
@@ -75,12 +85,15 @@ public class Test {
 		stack.print();
 		
 		System.out.println("Iterating through stack and inserting nodes into tree...");
-		
+		/*
 		StackIterator iterator = stack.iterator();
 		
 		while(iterator.hasNext()) {
 			Node currentNode = iterator.next();
 			tree.insert(currentNode);
+		}*/
+		for(Node n:stack) {
+			tree.insert(n);
 		}
 		
 		System.out.println("Tree is empty: " + tree.empty());
