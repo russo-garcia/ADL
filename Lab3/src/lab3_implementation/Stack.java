@@ -13,7 +13,9 @@
 
 package lab3_implementation;
 
-public class Stack {
+import java.util.Iterator;
+
+public class Stack implements Iterable<Node> {
 	private List l;
 	
 	public Stack() {
@@ -32,11 +34,45 @@ public class Stack {
 		return l.removeLastElem();
 	}
 	
+	public Node peek() {
+		return l.getNext();
+	}
+	
 	public void print() {
 		l.print();
 	}
+
+	@Override
+	public Iterator<Node> iterator() {
+		return new Iterator<Node>(){
+			private int pos = -1;
+			private boolean empty = false;
+			private Stack helper = new Stack();
+			
+			@Override
+			public boolean hasNext() {
+				return !empty;				
+			}
+			
+			@Override
+			public Node next() {
+				pos ++;
+				Node n = pop();
+				helper.push(n);
+				if(empty()) {
+					this.empty = true;
+					while(!helper.empty()) {
+						Node n2 = helper.pop();
+						push(n2);
+					}
+				}
+				return n;	
+			}
+		};
+	}
 	
+	/*
 	public StackIterator iterator() {
 		return new StackIterator(l.getHead());
-	}
+	}*/
 }

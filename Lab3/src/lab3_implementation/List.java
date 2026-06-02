@@ -78,4 +78,12 @@ public class List {
 		}
 		return current;
 	}
+
+	public Node getNext() {
+		Node next = null;
+		if(head.getNext() != null) {
+			next = head.getNext().getData();
+		}
+		return next;
+	}
 }
