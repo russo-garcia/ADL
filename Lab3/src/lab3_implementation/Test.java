@@ -104,7 +104,7 @@ public class Test {
 			Node previousNode = iterator.next();
 			System.out.print(previousNode.getKey() + " ");
 			
-			while(iterator.hasNext()) {
+			while(iterator.hasNext() && sorted) {
 				Node currentNode = iterator.next();
 				System.out.print(currentNode.getKey() + " ");
 				
