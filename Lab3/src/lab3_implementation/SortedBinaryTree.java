@@ -25,6 +25,49 @@ public class SortedBinaryTree<E> {
 	public void insert(Node newNode) {
 		if(empty()) {
 			root = newNode;
+			System.out.println("ROOT " + root.getKey());
+		}else {
+			insert(root, newNode, root);
+		}
+	}
+	
+	private void insert(Node kRoot, Node newNode, Node pre) {
+		if(newNode.getKey() < kRoot.getKey()) {
+			if(kRoot.getLeft() == null) {
+				newNode.setLeft(null);
+				newNode.setRight(null);
+				newNode.setParent(pre);
+				kRoot.setLeft(newNode);
+				
+				/*//FOR DEBUG
+				if(pre != null) {
+					System.out.println("LEFT NODE " + newNode.getKey() + " PRE " + pre.getKey());
+				}*/
+			}else {
+				insert(kRoot.getLeft(), newNode, kRoot.getLeft());
+
+			}
+		}else {
+			if(kRoot.getRight() == null) {
+				newNode.setLeft(null);
+				newNode.setRight(null);
+				newNode.setParent(pre);
+				kRoot.setRight(newNode);
+				
+				/*//FOR DEBUG
+				if(pre != null) {
+					System.out.println("RIGHT NODE " + newNode.getKey() + " PRE " + pre.getKey());
+				}*/
+			}else {
+				insert(kRoot.getRight(), newNode, kRoot.getRight());
+
+			}
+		}		
+	}
+	
+	public void insert_deprecated(Node newNode) {
+		if(empty()) {
+			root = newNode;
 		}else {
 			Node current = root;
 			Node parent = null;
